@@ -13,3 +13,8 @@ If your language provides a method in the standard library that does this look-u
 */
 
 #include <gtest/gtest.h>
+
+TEST(IS_LEAP_YEAR, FALSE)
+{
+    ASSERT_FALSE(is_leap_year(1997));
+}
