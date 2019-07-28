@@ -13,3 +13,64 @@ If your language provides a method in the standard library that does this look-u
 */
 
 #include <gtest/gtest.h>
+namespace
+{
+    const int FOUR_YEARS = 4;
+    const int ONE_HUNDRED_YEARS = 100;
+    const int FOUR_HUNDRED_YEARS = 400;
+
+    const char ZERO_YEAR_ERROR [] = "0 year doesn't exist.";
+
+    bool is_leap_year(int year)
+    {
+        auto is_divisible_by = [] (int number, int devider) {return number % devider == 0;};
+
+        if (year == 0)
+        {
+            throw std::runtime_error(ZERO_YEAR_ERROR);
+        }
+
+        if (is_divisible_by(year, FOUR_HUNDRED_YEARS))
+        {
+            return true;
+        }
+
+        if (is_divisible_by(year, ONE_HUNDRED_YEARS))
+        {
+            return false;
+        }
+
+        if (is_divisible_by(year, FOUR_YEARS))
+        {
+            return true;
+        }
+
+        return false;
+    }
+}
+
+
+TEST(IS_LEAP_YEAR, FALSE)
+{
+    ASSERT_FALSE(is_leap_year(1997));
+}
+
+TEST(IS_LEAP_YEAR, TRUE)
+{
+    ASSERT_TRUE(is_leap_year(2016));
+}
+
+TEST(IS_LEAP_YEAR, FALSE_DIVISIBLE_BY_100)
+{
+    ASSERT_FALSE(is_leap_year(1900));
+}
+
+TEST(IS_LEAP_YEAR, TRUE_DIVISIBLE_BY_400)
+{
+    ASSERT_TRUE(is_leap_year(2000));
+}
+
+TEST(IS_LEAP_YEAR, ZERO_YEAR)
+{
+    EXPECT_ANY_THROW(is_leap_year(0));
+}

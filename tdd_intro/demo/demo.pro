@@ -8,3 +8,4 @@ SUBDIRS += \
     #03_allergies \
     03_roman_numerals \
     04_timer
+CONFIG += thread

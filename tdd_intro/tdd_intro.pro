@@ -9,3 +9,5 @@ SUBDIRS += \
 homework.depends = 3rd_party
 workshops.depends = 3rd_party
 cleanroom.depends = 3rd_party
+
+CONFIG += thread
