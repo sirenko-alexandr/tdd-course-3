@@ -46,6 +46,12 @@
 #include "gmock/internal/gmock-port.h"
 #include "gtest/gtest.h"
 
+enum RelationToSource {
+  kReference,  // The NativeArray references the native array.
+  kCopy           // The NativeArray makes a copy of the native array and
+                      // owns the copy.
+};
+
 namespace testing {
 namespace internal {
 
