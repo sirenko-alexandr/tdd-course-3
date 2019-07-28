@@ -35,3 +35,8 @@ TEST(IS_LEAP_YEAR, TRUE)
 {
     ASSERT_TRUE(is_leap_year(2016));
 }
+
+TEST(IS_LEAP_YEAR, FALSE_DIVISIBLE_BY_100)
+{
+    ASSERT_FALSE(is_leap_year(1900));
+}
