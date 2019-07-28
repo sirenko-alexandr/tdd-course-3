@@ -15,14 +15,25 @@ If your language provides a method in the standard library that does this look-u
 #include <gtest/gtest.h>
 namespace
 {
+    const int FOUR_YEARS = 4;
+    const int ONE_HUNDRED_YEARS = 100;
+    const int FOUR_HUNDRED_YEARS = 400;
+
     bool is_leap_year(int year)
     {
-        if (year % 100 == 0)
+        auto is_divisible_by = [] (int number, int devider) {return number % devider == 0;};
+
+        if (is_divisible_by(year, FOUR_HUNDRED_YEARS))
+        {
+            return true;
+        }
+
+        if (is_divisible_by(year, ONE_HUNDRED_YEARS))
         {
             return false;
         }
 
-        if (year % 4 == 0)
+        if (is_divisible_by(year, FOUR_YEARS))
         {
             return true;
         }
