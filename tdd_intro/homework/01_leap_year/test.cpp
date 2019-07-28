@@ -23,6 +23,11 @@ namespace
     {
         auto is_divisible_by = [] (int number, int devider) {return number % devider == 0;};
 
+        if (year == 0)
+        {
+            throw std::runtime_error("0 year doesn't exist.");
+        }
+
         if (is_divisible_by(year, FOUR_HUNDRED_YEARS))
         {
             return true;
