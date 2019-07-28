@@ -13,6 +13,14 @@ If your language provides a method in the standard library that does this look-u
 */
 
 #include <gtest/gtest.h>
+namespace
+{
+    bool is_leap_year(int year)
+    {
+        return false;
+    }
+}
+
 
 TEST(IS_LEAP_YEAR, FALSE)
 {
