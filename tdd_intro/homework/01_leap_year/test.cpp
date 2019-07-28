@@ -19,13 +19,15 @@ namespace
     const int ONE_HUNDRED_YEARS = 100;
     const int FOUR_HUNDRED_YEARS = 400;
 
+    const char ZERO_YEAR_ERROR [] = "0 year doesn't exist.";
+
     bool is_leap_year(int year)
     {
         auto is_divisible_by = [] (int number, int devider) {return number % devider == 0;};
 
         if (year == 0)
         {
-            throw std::runtime_error("0 year doesn't exist.");
+            throw std::runtime_error(ZERO_YEAR_ERROR);
         }
 
         if (is_divisible_by(year, FOUR_HUNDRED_YEARS))
