@@ -26,3 +26,8 @@ TEST(IS_LEAP_YEAR, FALSE)
 {
     ASSERT_FALSE(is_leap_year(1997));
 }
+
+TEST(IS_LEAP_YEAR, TRUE)
+{
+    ASSERT_TRUE(is_leap_year(2016));
+}
