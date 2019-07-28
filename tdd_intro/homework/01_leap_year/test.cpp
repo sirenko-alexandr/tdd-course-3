@@ -62,3 +62,8 @@ TEST(IS_LEAP_YEAR, TRUE_DIVISIBLE_BY_400)
 {
     ASSERT_TRUE(is_leap_year(2000));
 }
+
+TEST(IS_LEAP_YEAR, ZERO_YEAR)
+{
+    EXPECT_ANY_THROW(is_leap_year(0));
+}
