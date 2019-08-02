@@ -936,6 +936,12 @@ IsContainer IsContainerTest(int /* dummy */,
   return 0;
 }
 
+enum RelationToSource {
+  kReference,  // The NativeArray references the native array.
+  kCopy           // The NativeArray makes a copy of the native array and
+                      // owns the copy.
+};
+
 typedef char IsNotContainer;
 template <class C>
 IsNotContainer IsContainerTest(long /* dummy */) { return '\0'; }
