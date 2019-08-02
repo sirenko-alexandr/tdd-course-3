@@ -20,7 +20,7 @@ bool isLeapYear(int year) {
     if (year < GREGORIAN_CALENDAR_ESTABLISHMENT_YEAR)
         return false;
 
-    return year % 4 == 0 && year % 100 != 0;
+    return (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
 }
 
 TEST(IS_LEAP_YEAR, WHEN_YEAR_IS_BEFORE_GREGORIAN_CALENDAR_THEN_RETURN_FALSE)
