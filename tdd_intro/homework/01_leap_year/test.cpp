@@ -14,6 +14,13 @@ If your language provides a method in the standard library that does this look-u
 
 #include <gtest/gtest.h>
 
+bool isLeapYear(int year) {
+    if (year < 1584)
+        return false;
+
+    return true;
+}
+
 TEST(IS_LEAP_YEAR, WHEN_YEAR_IS_BEFORE_GREGORIAN_CALENDAR_THEN_RETURN_FALSE)
 {
     ASSERT_FALSE(isLeapYear(1583));
