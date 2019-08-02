@@ -14,8 +14,10 @@ If your language provides a method in the standard library that does this look-u
 
 #include <gtest/gtest.h>
 
+const int GREGORIAN_CALENDAR_ESTABLISHMENT_YEAR = 1584;
+
 bool isLeapYear(int year) {
-    if (year < 1584)
+    if (year < GREGORIAN_CALENDAR_ESTABLISHMENT_YEAR)
         return false;
 
     return true;
