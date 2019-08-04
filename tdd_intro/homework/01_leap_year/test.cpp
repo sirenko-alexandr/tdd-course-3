@@ -14,9 +14,10 @@ If your language provides a method in the standard library that does this look-u
 
 #include <gtest/gtest.h>
 
+const size_t g_firstYearGregorianCallendar = 1583;
 bool isLeapYear(int year)
 {
-    if(year<1583)
+    if(year<g_firstYearGregorianCallendar)
     {
         return false;
     }
@@ -28,7 +29,7 @@ TEST(funcLeapYearTest, YearMultipleFour_returnTrue)
     ASSERT_TRUE(isLeapYear(1996));
 }
 
-TEST(funcLeapYearTest, YearBeforeGregorinCallendar_returnFalse)
+TEST(funcLeapYearTest, YearBeforeGregorianCallendar_returnFalse)
 {
     ASSERT_FALSE(isLeapYear(1581));
 }
