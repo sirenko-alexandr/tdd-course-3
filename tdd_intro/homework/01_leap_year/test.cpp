@@ -13,3 +13,10 @@ If your language provides a method in the standard library that does this look-u
 */
 
 #include <gtest/gtest.h>
+
+
+
+TEST(funcLeapYearTest, YearMultipleFour_returnTrue)
+{
+    ASSERT_TRUE(isLeapYear(1996));
+}
