@@ -16,6 +16,10 @@ If your language provides a method in the standard library that does this look-u
 
 bool isLeapYear(int year)
 {
+    if(year<1583)
+    {
+        return false;
+    }
     return true;
 }
 
