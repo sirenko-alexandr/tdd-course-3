@@ -42,3 +42,8 @@ TEST(funcLeapYearTest, YearNotMultipleFour_returnFalse)
 {
     ASSERT_FALSE(isLeapYear(1997));
 }
+
+TEST(funcLeapYearTest, YearMultipleOneHundred_returnFalse)
+{
+    ASSERT_FALSE(isLeapYear(1900));
+}
