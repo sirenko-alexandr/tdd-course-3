@@ -23,3 +23,8 @@ TEST(funcLeapYearTest, YearMultipleFour_returnTrue)
 {
     ASSERT_TRUE(isLeapYear(1996));
 }
+
+TEST(funcLeapYearTest, YearBeforeGregorinCallendar_returnFalse)
+{
+    ASSERT_FALSE(isLeapYear(1581));
+}
