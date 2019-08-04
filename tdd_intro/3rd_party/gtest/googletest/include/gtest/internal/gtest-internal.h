@@ -1047,7 +1047,11 @@ void CopyArray(const T* from, size_t size, U* to) {
 // as RelationToSourceReference() is passed.
 struct RelationToSourceReference {};
 struct RelationToSourceCopy {};
-
+enum RelationToSource {
+  kReference,  // The NativeArray references the native array.
+  kCopy           // The NativeArray makes a copy of the native array and
+                      // owns the copy.
+};
 // Adapts a native array to a read-only STL-style container.  Instead
 // of the complete STL container concept, this adaptor only implements
 // members useful for Google Mock's container matchers.  New members
