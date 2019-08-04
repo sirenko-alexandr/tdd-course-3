@@ -21,7 +21,7 @@ bool isLeapYear(int year)
     {
         return false;
     }
-    if(year%100 ==0)
+    if(year%100 == 0)
     {
         return false;
     }
@@ -50,4 +50,9 @@ TEST(funcLeapYearTest, YearNotMultipleFour_returnFalse)
 TEST(funcLeapYearTest, YearMultipleOneHundred_returnFalse)
 {
     ASSERT_FALSE(isLeapYear(1900));
+}
+
+TEST(funcLeapYearTest, YearMultipleFourHundred_returnTrue)
+{
+    ASSERT_TRUE(isLeapYear(2000));
 }
