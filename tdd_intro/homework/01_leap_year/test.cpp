@@ -21,7 +21,11 @@ bool isLeapYear(int year)
     {
         return false;
     }
-    return true;
+    if(year%4 == 0)
+    {
+        return true;
+    }
+    return false;
 }
 
 TEST(funcLeapYearTest, YearMultipleFour_returnTrue)
