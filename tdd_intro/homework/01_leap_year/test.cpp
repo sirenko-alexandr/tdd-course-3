@@ -15,21 +15,14 @@ If your language provides a method in the standard library that does this look-u
 #include <gtest/gtest.h>
 
 const size_t g_firstYearGregorianCallendar = 1583;
+
 bool isLeapYear(int year)
 {
     if(year<g_firstYearGregorianCallendar)
     {
         return false;
     }
-    if(year%400 == 0)
-    {
-        return true;
-    }
-    if(year%100 == 0)
-    {
-        return false;
-    }
-    if(year%4 == 0)
+    if(year%400 == 0 || (year%4 == 0 && year%100 != 0))
     {
         return true;
     }
