@@ -13,3 +13,43 @@ If your language provides a method in the standard library that does this look-u
 */
 
 #include <gtest/gtest.h>
+
+const size_t g_firstYearGregorianCallendar = 1583;
+
+bool isLeapYear(int year)
+{
+    if(year<g_firstYearGregorianCallendar)
+    {
+        return false;
+    }
+    if(year%400 == 0 || (year%4 == 0 && year%100 != 0))
+    {
+        return true;
+    }
+    return false;
+}
+
+TEST(funcLeapYearTest, YearMultipleFour_returnTrue)
+{
+    ASSERT_TRUE(isLeapYear(1996));
+}
+
+TEST(funcLeapYearTest, YearBeforeGregorianCallendar_returnFalse)
+{
+    ASSERT_FALSE(isLeapYear(1581));
+}
+
+TEST(funcLeapYearTest, YearNotMultipleFour_returnFalse)
+{
+    ASSERT_FALSE(isLeapYear(1997));
+}
+
+TEST(funcLeapYearTest, YearMultipleOneHundred_returnFalse)
+{
+    ASSERT_FALSE(isLeapYear(1900));
+}
+
+TEST(funcLeapYearTest, YearMultipleFourHundred_returnTrue)
+{
+    ASSERT_TRUE(isLeapYear(2000));
+}
