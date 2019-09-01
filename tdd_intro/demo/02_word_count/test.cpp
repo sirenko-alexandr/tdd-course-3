@@ -17,3 +17,14 @@ such: 1
 #include <string>
 #include <map>
 
+
+std::map<std::string, int> funcWordCount(std::string str)
+{
+    std::map<std::string, int> allWorlds;
+    return allWorlds;
+}
+
+TEST(funcWordCount, onlyOneWord)
+{
+     ASSERT_TRUE(funcWordCount("").empty());
+}
