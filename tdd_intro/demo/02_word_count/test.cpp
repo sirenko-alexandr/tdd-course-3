@@ -104,3 +104,7 @@ TEST(funcWordCount, countLet)
      ASSERT_EQ(funcWordCount("olly olly in come free please please let it be in such manner olly")["let"], 1);
 }
 
+TEST(funcWordCount, withSomeSpaces_mapHas2Key)
+{
+     ASSERT_EQ(funcWordCount("olly olly  in").size(), 2);
+}
