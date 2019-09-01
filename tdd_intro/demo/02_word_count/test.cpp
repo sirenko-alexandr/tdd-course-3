@@ -20,15 +20,11 @@ such: 1
 #include <string.h>
 #include <map>
 
-const char SPACE = ' ';
+const char* ignoringSymbols = " ,.-!";
 const int startCount = 1;
 
-void changeCountValueInMap(std::map<std::string, int> &words, std::string word)
+void changeCountValueInMap(std::map<std::string, int> &words,const std::string& word)
 {
-    if(word.empty())
-    {
-        return;
-    }
     if(words.find(word) != words.end())
     {
         words[word]++;
@@ -46,11 +42,11 @@ std::map<std::string, int> funcWordCount(std::string str)
         return allWords;
     }
     char* inputStr = &str[0];
-    char* nextWord = strtok (inputStr," ,.-!");
-    while (nextWord != NULL)
+    char* nextWord = strtok (inputStr,ignoringSymbols);
+    while (nextWord != nullptr)
     {
         changeCountValueInMap(allWords,nextWord);
-        nextWord = strtok (NULL, " ,.-!");
+        nextWord = strtok (nullptr, ignoringSymbols);
     }
     return allWords;
 }
@@ -87,7 +83,7 @@ TEST(funcWordCount, countOlly)
 
 TEST(funcWordCount, countIn)
 {
-     ASSERT_EQ(funcWordCount("olly olly in come free please please let it be in! such manner olly")["in"], 2);
+     ASSERT_EQ(funcWordCount("olly olly in come free please please let it be in such manner olly")["in"], 2);
 }
 
 TEST(funcWordCount, countCome)
