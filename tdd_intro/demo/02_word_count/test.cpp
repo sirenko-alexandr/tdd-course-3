@@ -22,6 +22,10 @@ const int startCount = 1;
 
 void changeCountValueInMap(std::map<std::string, int> &words, std::string word)
 {
+    if(word.empty())
+    {
+        return;
+    }
     if(words.find(word) != words.end())
     {
         words[word]++;
