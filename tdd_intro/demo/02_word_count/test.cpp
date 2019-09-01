@@ -34,7 +34,21 @@ std::map<std::string, int> funcWordCount(std::string str)
     }
     else
     {
-        allWords[str.substr(0,position)]=startCount;
+        if(allWords.count(str.substr(0,position)))
+        {
+            allWords[str.substr(0,position)]++;
+        }
+        else {
+            allWords[str.substr(0,position)]=startCount;
+        }
+        size_t positionSecond = str.find(SPACE, position);
+        if(allWords.count(str.substr(position+1, positionSecond)))
+        {
+            allWords[str.substr(position+1, positionSecond)]++;
+        }
+        else {
+            allWords[str.substr(position+1, positionSecond)]=startCount;
+        }
     }
     return allWords;
 }
