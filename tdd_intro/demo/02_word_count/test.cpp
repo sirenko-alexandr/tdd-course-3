@@ -17,6 +17,9 @@ such: 1
 #include <string>
 #include <map>
 
+const char SPACE = ' ';
+const int startCount = 1;
+
 std::map<std::string, int> funcWordCount(std::string str)
 {
     std::map<std::string, int> allWords;
@@ -24,10 +27,10 @@ std::map<std::string, int> funcWordCount(std::string str)
     {
         return allWords;
     }
-    std::size_t position = str.find(' ');
+    std::size_t position = str.find(SPACE);
     if (position==std::string::npos)
     {
-        allWords[str]=1;
+        allWords[str]=startCount;
     }
     return allWords;
 }
