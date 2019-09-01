@@ -38,31 +38,18 @@ std::map<std::string, int> funcWordCount(std::string str)
     {
         return allWords;
     }
-    std::size_t position = str.find(SPACE);
-    if (position==std::string::npos)
+    std::size_t startPosition = 0;
+    size_t nextPosition = 0;
+    while(startPosition <= str.size())
     {
-        allWords[str]=startCount;
-    }
-    else
-    {
-        changeCountValueInMap(allWords, str.substr(0,position));
-        position++;
-        if(position == std::string::npos)
+        nextPosition = str.find(SPACE,startPosition);
+        if(nextPosition == std::string::npos)
         {
+            changeCountValueInMap(allWords, str.substr(startPosition));
             return allWords;
         }
-        size_t positionSecond;
-        while (position <= str.size())
-        {
-            positionSecond = str.find(SPACE, position);
-            if(positionSecond == std::string::npos)
-            {
-                changeCountValueInMap(allWords, str.substr(position));
-                return allWords;
-            }
-            changeCountValueInMap(allWords, str.substr(position, positionSecond-position));
-            position = positionSecond+1;
-        }
+        changeCountValueInMap(allWords, str.substr(startPosition,nextPosition - startPosition));
+        startPosition = nextPosition + 1;
     }
     return allWords;
 }
