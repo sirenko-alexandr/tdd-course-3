@@ -17,14 +17,18 @@ such: 1
 #include <string>
 #include <map>
 
-
 std::map<std::string, int> funcWordCount(std::string str)
 {
-    std::map<std::string, int> allWorlds;
-    return allWorlds;
+    std::map<std::string, int> allWords;
+    return allWords;
 }
 
-TEST(funcWordCount, onlyOneWord)
+TEST(funcWordCount, NoWord)
 {
      ASSERT_TRUE(funcWordCount("").empty());
+}
+
+TEST(funcWordCount, mapHasOneKey)
+{
+     ASSERT_EQ(funcWordCount("olly").size(), 1);
 }
