@@ -44,3 +44,8 @@ TEST(funcWordCount, mapHasOneKey)
 {
      ASSERT_EQ(funcWordCount("olly").size(), 1);
 }
+
+TEST(funcWordCount, stringWithOneWordAndSpace)
+{
+     ASSERT_EQ(funcWordCount("olly ")["olly"], 1);
+}
