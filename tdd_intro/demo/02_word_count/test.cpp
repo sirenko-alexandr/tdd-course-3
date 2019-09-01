@@ -52,10 +52,15 @@ std::map<std::string, int> funcWordCount(std::string str)
             return allWords;
         }
         size_t positionSecond;
-        while (positionSecond != std::string::npos)
+        while (position <= str.size())
         {
             positionSecond = str.find(SPACE, position);
-            changeCountValueInMap(allWords, str.substr(position, positionSecond));
+            if(positionSecond == std::string::npos)
+            {
+                changeCountValueInMap(allWords, str.substr(position));
+                return allWords;
+            }
+            changeCountValueInMap(allWords, str.substr(position, positionSecond-position));
             position = positionSecond+1;
         }
     }
