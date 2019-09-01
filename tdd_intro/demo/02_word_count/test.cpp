@@ -53,3 +53,8 @@ TEST(funcWordCount, stringWithOneWordAndSpace)
 {
      ASSERT_EQ(funcWordCount("olly ")["olly"], 1);
 }
+
+TEST(funcWordCount, stringWithSameWord)
+{
+     ASSERT_EQ(funcWordCount("olly olly")["olly"], 2);
+}
