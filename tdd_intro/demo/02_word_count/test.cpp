@@ -32,6 +32,10 @@ std::map<std::string, int> funcWordCount(std::string str)
     {
         allWords[str]=startCount;
     }
+    else
+    {
+        allWords[str.substr(0,position)]=startCount;
+    }
     return allWords;
 }
 
