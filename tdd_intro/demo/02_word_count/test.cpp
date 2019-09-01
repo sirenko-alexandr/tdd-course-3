@@ -20,6 +20,17 @@ such: 1
 const char SPACE = ' ';
 const int startCount = 1;
 
+void changeCountValueInMap(std::map<std::string, int> &words, std::string word)
+{
+    if(words.find(word) != words.end())
+    {
+        words[word]++;
+    }
+    else {
+        words[word]=startCount;
+    }
+}
+
 std::map<std::string, int> funcWordCount(std::string str)
 {
     std::map<std::string, int> allWords;
@@ -34,20 +45,18 @@ std::map<std::string, int> funcWordCount(std::string str)
     }
     else
     {
-        if(allWords.count(str.substr(0,position)))
+        changeCountValueInMap(allWords, str.substr(0,position));
+        position++;
+        if(position == std::string::npos)
         {
-            allWords[str.substr(0,position)]++;
+            return allWords;
         }
-        else {
-            allWords[str.substr(0,position)]=startCount;
-        }
-        size_t positionSecond = str.find(SPACE, position);
-        if(allWords.count(str.substr(position+1, positionSecond)))
+        size_t positionSecond;
+        while (positionSecond != std::string::npos)
         {
-            allWords[str.substr(position+1, positionSecond)]++;
-        }
-        else {
-            allWords[str.substr(position+1, positionSecond)]=startCount;
+            positionSecond = str.find(SPACE, position);
+            changeCountValueInMap(allWords, str.substr(position, positionSecond));
+            position = positionSecond+1;
         }
     }
     return allWords;
