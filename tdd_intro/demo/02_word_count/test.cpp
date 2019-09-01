@@ -20,6 +20,15 @@ such: 1
 std::map<std::string, int> funcWordCount(std::string str)
 {
     std::map<std::string, int> allWords;
+    if(str.empty())
+    {
+        return allWords;
+    }
+    std::size_t position = str.find(' ');
+    if (position==std::string::npos)
+    {
+        allWords[str]=1;
+    }
     return allWords;
 }
 
