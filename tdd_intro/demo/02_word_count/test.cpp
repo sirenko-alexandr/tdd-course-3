@@ -15,6 +15,9 @@ such: 1
 
 #include <gtest/gtest.h>
 #include <string>
+#include <cstring>
+#include <stdio.h>
+#include <string.h>
 #include <map>
 
 const char SPACE = ' ';
@@ -42,18 +45,12 @@ std::map<std::string, int> funcWordCount(std::string str)
     {
         return allWords;
     }
-    size_t startPosition = 0;
-    size_t nextPosition = 0;
-    while(startPosition <= str.size())
+    char* inputStr = &str[0];
+    char* nextWord = strtok (inputStr," ,.-!");
+    while (nextWord != NULL)
     {
-        nextPosition = str.find(SPACE,startPosition);
-        if(nextPosition == std::string::npos)
-        {
-            changeCountValueInMap(allWords, str.substr(startPosition));
-            return allWords;
-        }
-        changeCountValueInMap(allWords, str.substr(startPosition,nextPosition - startPosition));
-        startPosition = nextPosition + 1;
+        changeCountValueInMap(allWords,nextWord);
+        nextWord = strtok (NULL, " ,.-!");
     }
     return allWords;
 }
