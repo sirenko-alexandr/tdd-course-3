@@ -42,7 +42,7 @@ std::map<std::string, int> funcWordCount(std::string str)
     {
         return allWords;
     }
-    std::size_t startPosition = 0;
+    size_t startPosition = 0;
     size_t nextPosition = 0;
     while(startPosition <= str.size())
     {
@@ -90,7 +90,7 @@ TEST(funcWordCount, countOlly)
 
 TEST(funcWordCount, countIn)
 {
-     ASSERT_EQ(funcWordCount("olly olly in come free please please let it be in such manner olly")["in"], 2);
+     ASSERT_EQ(funcWordCount("olly olly in come free please please let it be in! such manner olly")["in"], 2);
 }
 
 TEST(funcWordCount, countCome)
@@ -111,4 +111,9 @@ TEST(funcWordCount, countLet)
 TEST(funcWordCount, withSomeSpaces_mapHas2Key)
 {
      ASSERT_EQ(funcWordCount("olly olly  in").size(), 2);
+}
+
+TEST(funcWordCount, withPunctualSymbols_mapHas2Key)
+{
+     ASSERT_EQ(funcWordCount("olly olly,  in!").size(), 2);
 }
