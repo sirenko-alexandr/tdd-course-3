@@ -81,3 +81,34 @@ TEST(funcWordCount, stringWithSameWord)
 {
      ASSERT_EQ(funcWordCount("olly olly")["olly"], 2);
 }
+
+TEST(funcWordCount, countPlease)
+{
+     ASSERT_EQ(funcWordCount("olly olly in come free please please let it be in such manner olly")["please"], 2);
+}
+
+TEST(funcWordCount, countOlly)
+{
+     ASSERT_EQ(funcWordCount("olly olly in come free please please let it be in such manner olly")["olly"], 3);
+}
+
+TEST(funcWordCount, countIn)
+{
+     ASSERT_EQ(funcWordCount("olly olly in come free please please let it be in such manner olly")["in"], 2);
+}
+
+TEST(funcWordCount, countCome)
+{
+     ASSERT_EQ(funcWordCount("olly olly in come free please please let it be in such manner olly")["come"], 1);
+}
+
+TEST(funcWordCount, countFree)
+{
+     ASSERT_EQ(funcWordCount("olly olly in come free please please let it be in such manner olly")["free"], 1);
+}
+
+TEST(funcWordCount, countLet)
+{
+     ASSERT_EQ(funcWordCount("olly olly in come free please please let it be in such manner olly")["let"], 1);
+}
+
