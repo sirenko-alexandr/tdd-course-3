@@ -87,6 +87,7 @@ Example input and output
 #include <gtest/gtest.h>
 #include <string>
 
+
 const unsigned short g_digitLen = 3;
 const unsigned short g_linesInDigit = 3;
 struct Digit
@@ -229,7 +230,18 @@ int convertDigitToInt(const Digit& digit)
 
 std::string convertDisplayToString (const Display display)
 {
-    return "000000000";
+    std::string result = "";
+    for (size_t i = 0; i < 27; i+=3)
+    {
+        Digit newDigit;
+        newDigit.lines[0] = display.lines[0].substr(i,3);
+        newDigit.lines[1] = display.lines[1].substr(i,3);
+        newDigit.lines[2] = display.lines[2].substr(i,3);
+        int value =convertDigitToInt(newDigit);
+        std::string str = std::to_string(value);
+        result.append(str);
+    }
+    return result;
 }
 
 TEST(convertDigitToInt, oneDigit)
