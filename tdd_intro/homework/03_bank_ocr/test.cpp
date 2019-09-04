@@ -197,12 +197,20 @@ const Display s_display123456789 = { "    _  _     _  _  _  _  _ ",
 };
 
 
+
+const Digit s_digitq2 = {    " _ ",
+                             " _|",
+                             "|_ "};
 int convertDigitToInt(Digit digit)
 {
 
     if(digit.lines[0] == s_digit1.lines[0])
     {
         return 1;
+    }
+    if(digit.lines[0]==s_digit2.lines[0] && digit.lines[1]==s_digit2.lines[1] &&digit.lines[2]==s_digit2.lines[2])
+    {
+        return 2;
     }
 
     return 0;
