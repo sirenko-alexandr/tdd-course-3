@@ -213,3 +213,8 @@ TEST(convertDigitToInt, oneDigit)
     ASSERT_EQ(convertDigitToInt(s_digit1), 1);
 }
 
+TEST(convertDigitToInt, oneDigit_return2)
+{
+    ASSERT_EQ(convertDigitToInt(s_digit2), 2);
+}
+
