@@ -195,3 +195,15 @@ const Display s_display123456789 = { "    _  _     _  _  _  _  _ ",
                                      "  | _| _||_||_ |_   ||_||_|",
                                      "  ||_  _|  | _||_|  ||_| _|"
 };
+
+
+int convertDigitToInt(Digit digit)
+{
+    return 0;
+}
+
+TEST(convertDigitToInt, oneDigit)
+{
+    ASSERT_EQ(convertDigitToInt(s_digit0), 1);
+}
+
