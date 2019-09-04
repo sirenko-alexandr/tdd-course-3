@@ -261,3 +261,8 @@ TEST(convertDisplayToString, s_displayAll0)
 {
     ASSERT_EQ(convertDisplayToString(s_displayAll0), "000000000");
 }
+
+TEST(convertDisplayToString, s_displayAll1)
+{
+    ASSERT_EQ(convertDisplayToString(s_displayAll1), "111111111");
+}
