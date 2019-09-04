@@ -199,11 +199,17 @@ const Display s_display123456789 = { "    _  _     _  _  _  _  _ ",
 
 int convertDigitToInt(Digit digit)
 {
+
+    if(digit.lines[0] == s_digit1.lines[0])
+    {
+        return 1;
+    }
+
     return 0;
 }
 
 TEST(convertDigitToInt, oneDigit)
 {
-    ASSERT_EQ(convertDigitToInt(s_digit0), 1);
+    ASSERT_EQ(convertDigitToInt(s_digit1), 1);
 }
 
