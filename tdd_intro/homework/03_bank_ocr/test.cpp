@@ -226,6 +226,12 @@ int convertDigitToInt(const Digit& digit)
     return 0;
 }
 
+
+std::string convertDisplayToString (const Display display)
+{
+    return "";
+}
+
 TEST(convertDigitToInt, oneDigit)
 {
     ASSERT_EQ(convertDigitToInt(s_digit1), 1);
@@ -241,3 +247,17 @@ TEST(convertDigitToInt, oneDigit_return5)
     ASSERT_EQ(convertDigitToInt(s_digit5), 5);
 }
 
+TEST(compareDigits, compareSameDigit)
+{
+    ASSERT_TRUE(compareDigits(s_digit7, s_digit7));
+}
+
+TEST(compareDigits, compareDifferentDigit)
+{
+    ASSERT_FALSE(compareDigits(s_digit7, s_digit9));
+}
+
+TEST(convertDisplayToString, s_displayAll0)
+{
+    ASSERT_EQ(convertDisplayToString(s_displayAll0), "000000000");
+}
