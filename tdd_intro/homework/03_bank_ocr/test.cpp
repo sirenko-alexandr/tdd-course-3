@@ -196,23 +196,33 @@ const Display s_display123456789 = { "    _  _     _  _  _  _  _ ",
                                      "  ||_  _|  | _||_|  ||_| _|"
 };
 
+const Digit s_arrayDigits[]= {s_digit0,s_digit1,s_digit2,s_digit3,s_digit4,s_digit5,s_digit6,s_digit7,s_digit8,s_digit9};
 
 
-const Digit s_digitq2 = {    " _ ",
-                             " _|",
-                             "|_ "};
-int convertDigitToInt(Digit digit)
+bool compareDigits(const Digit& digit, size_t index)
 {
-
-    if(digit.lines[0] == s_digit1.lines[0])
+    bool result = false;
+    for(size_t j = 0; j < 3; j++)
     {
-        return 1;
+        if(digit.lines[j] != s_arrayDigits[index].lines[j])
+        {
+            result = false;
+            continue;
+        }
+        result = true;
     }
-    if(digit.lines[0]==s_digit2.lines[0] && digit.lines[1]==s_digit2.lines[1] &&digit.lines[2]==s_digit2.lines[2])
-    {
-        return 2;
-    }
+    return result;
+}
 
+int convertDigitToInt(const Digit& digit)
+{
+    for(size_t i = 0 ; i < 10; i++)
+    {
+        if(compareDigits(digit, i))
+        {
+            return i;
+        }
+    }
     return 0;
 }
 
@@ -225,4 +235,5 @@ TEST(convertDigitToInt, oneDigit_return2)
 {
     ASSERT_EQ(convertDigitToInt(s_digit2), 2);
 }
+
 
