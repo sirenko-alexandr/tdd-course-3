@@ -199,12 +199,12 @@ const Display s_display123456789 = { "    _  _     _  _  _  _  _ ",
 const Digit s_arrayDigits[]= {s_digit0,s_digit1,s_digit2,s_digit3,s_digit4,s_digit5,s_digit6,s_digit7,s_digit8,s_digit9};
 
 
-bool compareDigits(const Digit& digit, size_t index)
+bool compareDigits(const Digit& digit, const Digit& digitFromArray)
 {
     bool result = false;
     for(size_t j = 0; j < 3; j++)
     {
-        if(digit.lines[j] != s_arrayDigits[index].lines[j])
+        if(digit.lines[j] != digitFromArray.lines[j])
         {
             result = false;
             break;
@@ -218,7 +218,7 @@ int convertDigitToInt(const Digit& digit)
 {
     for(size_t i = 0 ; i < 10; i++)
     {
-        if(compareDigits(digit, i))
+        if(compareDigits(digit, s_arrayDigits[i]))
         {
             return i;
         }
