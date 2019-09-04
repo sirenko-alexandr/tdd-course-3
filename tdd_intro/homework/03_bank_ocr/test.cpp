@@ -236,4 +236,8 @@ TEST(convertDigitToInt, oneDigit_return2)
     ASSERT_EQ(convertDigitToInt(s_digit2), 2);
 }
 
+TEST(convertDigitToInt, oneDigit_return5)
+{
+    ASSERT_EQ(convertDigitToInt(s_digit5), 5);
+}
 
