@@ -207,7 +207,7 @@ bool compareDigits(const Digit& digit, size_t index)
         if(digit.lines[j] != s_arrayDigits[index].lines[j])
         {
             result = false;
-            continue;
+            break;
         }
         result = true;
     }
