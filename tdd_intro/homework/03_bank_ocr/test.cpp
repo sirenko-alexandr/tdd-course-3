@@ -229,7 +229,7 @@ int convertDigitToInt(const Digit& digit)
 
 std::string convertDisplayToString (const Display display)
 {
-    return "";
+    return "000000000";
 }
 
 TEST(convertDigitToInt, oneDigit)
