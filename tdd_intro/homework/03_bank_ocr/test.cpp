@@ -203,7 +203,7 @@ const Digit s_arrayDigits[]= {s_digit0,s_digit1,s_digit2,s_digit3,s_digit4,s_dig
 bool compareDigits(const Digit& digit, const Digit& digitFromArray)
 {
     bool result = false;
-    for(size_t j = 0; j < 3; j++)
+    for(size_t j = 0; j < g_linesInDigit; j++)
     {
         if(digit.lines[j] != digitFromArray.lines[j])
         {
@@ -231,13 +231,10 @@ int convertDigitToInt(const Digit& digit)
 std::string convertDisplayToString (const Display display)
 {
     std::string result = "";
-    for (size_t i = 0; i < 27; i+=3)
+    for (size_t i = 0; i < g_digitsOnDisplay*g_digitLen; i += g_digitLen)
     {
-        Digit newDigit;
-        newDigit.lines[0] = display.lines[0].substr(i,3);
-        newDigit.lines[1] = display.lines[1].substr(i,3);
-        newDigit.lines[2] = display.lines[2].substr(i,3);
-        int value =convertDigitToInt(newDigit);
+        Digit newDigit = {display.lines[0].substr(i,3), display.lines[1].substr(i,3), display.lines[2].substr(i,3)};
+        int value = convertDigitToInt(newDigit);
         std::string str = std::to_string(value);
         result.append(str);
     }
@@ -278,3 +275,5 @@ TEST(convertDisplayToString, s_displayAll1)
 {
     ASSERT_EQ(convertDisplayToString(s_displayAll1), "111111111");
 }
+
+
