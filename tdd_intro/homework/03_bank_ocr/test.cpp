@@ -87,6 +87,7 @@ Example input and output
 #include <gtest/gtest.h>
 #include <string>
 
+
 const unsigned short g_digitLen = 3;
 const unsigned short g_linesInDigit = 3;
 struct Digit
@@ -195,3 +196,89 @@ const Display s_display123456789 = { "    _  _     _  _  _  _  _ ",
                                      "  | _| _||_||_ |_   ||_||_|",
                                      "  ||_  _|  | _||_|  ||_| _|"
 };
+
+const Digit s_arrayDigits[]= {s_digit0,s_digit1,s_digit2,s_digit3,s_digit4,s_digit5,s_digit6,s_digit7,s_digit8,s_digit9};
+
+
+bool compareDigits(const Digit& digit, const Digit& digitFromArray)
+{
+    bool result = false;
+    for(size_t j = 0; j < g_linesInDigit; j++)
+    {
+        if(digit.lines[j] != digitFromArray.lines[j])
+        {
+            result = false;
+            break;
+        }
+        result = true;
+    }
+    return result;
+}
+
+int convertDigitToInt(const Digit& digit)
+{
+    for(size_t i = 0 ; i < 10; i++)
+    {
+        if(compareDigits(digit, s_arrayDigits[i]))
+        {
+            return i;
+        }
+    }
+    return 0;
+}
+
+
+std::string convertDisplayToString (const Display display)
+{
+    std::string result = "";
+    for (size_t i = 0; i < g_digitsOnDisplay*g_digitLen; i += g_digitLen)
+    {
+        Digit newDigit = {display.lines[0].substr(i,3), display.lines[1].substr(i,3), display.lines[2].substr(i,3)};
+        int value = convertDigitToInt(newDigit);
+        std::string str = std::to_string(value);
+        result.append(str);
+    }
+    return result;
+}
+
+TEST(convertDigitToInt, oneDigit)
+{
+    ASSERT_EQ(convertDigitToInt(s_digit1), 1);
+}
+
+TEST(convertDigitToInt, oneDigit_return2)
+{
+    ASSERT_EQ(convertDigitToInt(s_digit2), 2);
+}
+
+TEST(convertDigitToInt, oneDigit_return5)
+{
+    ASSERT_EQ(convertDigitToInt(s_digit5), 5);
+}
+
+TEST(compareDigits, compareSameDigit)
+{
+    ASSERT_TRUE(compareDigits(s_digit7, s_digit7));
+}
+
+TEST(compareDigits, compareDifferentDigit)
+{
+    ASSERT_FALSE(compareDigits(s_digit7, s_digit9));
+}
+
+TEST(convertDisplayToString, s_displayAll0)
+{
+    ASSERT_EQ(convertDisplayToString(s_displayAll0), "000000000");
+}
+
+TEST(convertDisplayToString, s_displayAll1)
+{
+    ASSERT_EQ(convertDisplayToString(s_displayAll1), "111111111");
+}
+
+TEST(convertDisplayToString, s_display123456789)
+{
+    ASSERT_EQ(convertDisplayToString(s_display123456789), "123456789");
+}
+
+
