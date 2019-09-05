@@ -276,4 +276,9 @@ TEST(convertDisplayToString, s_displayAll1)
     ASSERT_EQ(convertDisplayToString(s_displayAll1), "111111111");
 }
 
+TEST(convertDisplayToString, s_display123456789)
+{
+    ASSERT_EQ(convertDisplayToString(s_display123456789), "123456789");
+}
+
 
