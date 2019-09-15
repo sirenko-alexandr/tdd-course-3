@@ -19,12 +19,12 @@ In Roman numerals 1990 is MCMXC:
 
 #include <gtest/gtest.h>
 
-unsigned int convert(const std::string& romanNumber)
+std::string convertToRomanFromArabic(unsigned int arabicNumber)
 {
-    return 1;
+    return "I";
 }
 
 TEST(RomanNumbers, ConvertSimpleNumbers)
 {
-    EXPECT_EQ(1, convert("I"));
+    EXPECT_EQ("I", convertToRomanFromArabic(1));
 }
