@@ -27,18 +27,17 @@ static std::vector<std::pair<int, std::string>> arabicRomanVector {std::make_pai
                                                                    std::make_pair<int, std::string>(5, "V"),
                                                                    std::make_pair<int, std::string>(1, "I")};
 
-std::string getSubNumber(int& number)
+std::pair<int, std::string> getPairByNumber(const int number)
 {
     for (const auto& pair: arabicRomanVector)
     {
         if (number - pair.first >= 0)
         {
-            number -= pair.first;
-            return pair.second;
+            return pair;
         }
     }
 
-    return "";
+    return std::make_pair<int, std::string>(0, "");
 }
 
 std::string convertToRomanFromArabic(const int arabicNumber)
@@ -47,7 +46,10 @@ std::string convertToRomanFromArabic(const int arabicNumber)
     int tempValue = arabicNumber;
     while (tempValue)
     {
-        result += getSubNumber(tempValue);
+        auto pair = getPairByNumber(tempValue);
+
+        tempValue -= pair.first;
+        result += pair.second;
     }
 
     return result;
@@ -74,5 +76,4 @@ TEST(RomanNumbers, CompoundNumbers)
     {
         EXPECT_EQ(arabicRomanPair.second, convertToRomanFromArabic(arabicRomanPair.first));
     }
-
 }
