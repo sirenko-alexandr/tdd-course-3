@@ -64,16 +64,30 @@ TEST(RomanNumbers, ConvertSimpleNumbers)
     }
 }
 
-TEST(RomanNumbers, CompoundNumbers)
+TEST(RomanNumbers, ComplexNumbers)
 {
-    const std::map<int, std::string> compoundNumbers {std::make_pair<int, std::string>(2, "II"),
-                                                      std::make_pair<int, std::string>(6, "VI"),
-                                                      std::make_pair<int, std::string>(11, "XI"),
-                                                      std::make_pair<int, std::string>(60, "LX"),
-                                                      std::make_pair<int, std::string>(110, "CX"),
-                                                      std::make_pair<int, std::string>(600, "DC"),
-                                                      std::make_pair<int, std::string>(1100, "MC")};
-    for (const auto& arabicRomanPair: compoundNumbers)
+    const std::map<int, std::string> complexNumbers {std::make_pair<int, std::string>(2, "II"),
+                                                     std::make_pair<int, std::string>(6, "VI"),
+                                                     std::make_pair<int, std::string>(11, "XI"),
+                                                     std::make_pair<int, std::string>(60, "LX"),
+                                                     std::make_pair<int, std::string>(110, "CX"),
+                                                     std::make_pair<int, std::string>(600, "DC"),
+                                                     std::make_pair<int, std::string>(1100, "MC")};
+    for (const auto& arabicRomanPair: complexNumbers)
+    {
+        EXPECT_EQ(arabicRomanPair.second, convertToRomanFromArabic(arabicRomanPair.first));
+    }
+}
+
+TEST(RomanNumbers, ComplexNumbersWithReverseOrder)
+{
+    const std::map<int, std::string> complexNumbers {std::make_pair<int, std::string>(4, "IV"),
+                                                     std::make_pair<int, std::string>(9, "IX"),
+                                                     std::make_pair<int, std::string>(40, "XL"),
+                                                     std::make_pair<int, std::string>(90, "XC"),
+                                                     std::make_pair<int, std::string>(400, "CD"),
+                                                     std::make_pair<int, std::string>(900, "CM")};
+    for (const auto& arabicRomanPair: complexNumbers)
     {
         EXPECT_EQ(arabicRomanPair.second, convertToRomanFromArabic(arabicRomanPair.first));
     }
