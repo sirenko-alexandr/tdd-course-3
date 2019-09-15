@@ -18,6 +18,7 @@ In Roman numerals 1990 is MCMXC:
 */
 
 #include <gtest/gtest.h>
+#include <stdexcept>
 
 static std::vector<std::pair<int, std::string>> arabicRomanVector {std::make_pair<int, std::string>(1000, "M"),
                                                                    std::make_pair<int, std::string>(500, "D"),
@@ -37,22 +38,22 @@ std::pair<int, std::string> getPairByNumber(const int number)
         }
     }
 
-    return std::make_pair<int, std::string>(0, "");
+    throw std::runtime_error("Not found number.");
 }
 
 std::string convertToRomanFromArabic(const int arabicNumber)
 {
-    std::string result;
+    std::string romanNumber;
     int tempValue = arabicNumber;
     while (tempValue)
     {
         auto pair = getPairByNumber(tempValue);
 
         tempValue -= pair.first;
-        result += pair.second;
+        romanNumber += pair.second;
     }
 
-    return result;
+    return romanNumber;
 }
 
 TEST(RomanNumbers, ConvertSimpleNumbers)
