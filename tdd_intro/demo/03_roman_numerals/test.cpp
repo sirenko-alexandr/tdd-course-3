@@ -39,3 +39,19 @@ TEST(RomanNumbers, ConvertSimpleNumbers)
         EXPECT_EQ(arabicRomanPair.second, convertToRomanFromArabic(arabicRomanPair.first));
     }
 }
+
+TEST(RomanNumbers, CompoundNumbers)
+{
+    const std::map<unsigned int, std::string> compoundNumbers {std::make_pair<unsigned int, std::string>(2, "II"),
+                                                               std::make_pair<unsigned int, std::string>(6, "VI"),
+                                                               std::make_pair<unsigned int, std::string>(11, "XI"),
+                                                               std::make_pair<unsigned int, std::string>(60, "LX"),
+                                                               std::make_pair<unsigned int, std::string>(110, "CX"),
+                                                               std::make_pair<unsigned int, std::string>(600, "DC"),
+                                                               std::make_pair<unsigned int, std::string>(1100, "MC")};
+    for (const auto& arabicRomanPair: compoundNumbers)
+    {
+        EXPECT_EQ(arabicRomanPair.second, convertToRomanFromArabic(arabicRomanPair.first));
+    }
+
+}
