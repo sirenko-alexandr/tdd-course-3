@@ -51,15 +51,11 @@ std::string getSubNumber(int& number)
 
 std::string convertToRomanFromArabic(const int arabicNumber)
 {
-    auto result = arabicRomanMap[arabicNumber];
-
-    if (result == "")
+    std::string result;
+    int tempValue = arabicNumber;
+    while (tempValue)
     {
-        int tempValue = arabicNumber;
-        while (tempValue)
-        {
-            result += getSubNumber(tempValue);
-        }
+        result += getSubNumber(tempValue);
     }
 
     return result;
