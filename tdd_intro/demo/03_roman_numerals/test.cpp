@@ -19,21 +19,13 @@ In Roman numerals 1990 is MCMXC:
 
 #include <gtest/gtest.h>
 
-static std::map<int, std::string> arabicRomanMap {std::make_pair<int, std::string>(1, "I"),
-                                                  std::make_pair<int, std::string>(5, "V"),
-                                                  std::make_pair<int, std::string>(10, "X"),
-                                                  std::make_pair<int, std::string>(50, "L"),
-                                                  std::make_pair<int, std::string>(100, "C"),
-                                                  std::make_pair<int, std::string>(500, "D"),
-                                                  std::make_pair<int, std::string>(1000, "M")};
-
 static std::vector<std::pair<int, std::string>> arabicRomanVector {std::make_pair<int, std::string>(1000, "M"),
-                                                     std::make_pair<int, std::string>(500, "D"),
-                                                     std::make_pair<int, std::string>(100, "C"),
-                                                     std::make_pair<int, std::string>(50, "L"),
-                                                     std::make_pair<int, std::string>(10, "X"),
-                                                     std::make_pair<int, std::string>(5, "V"),
-                                                     std::make_pair<int, std::string>(1, "I")};
+                                                                   std::make_pair<int, std::string>(500, "D"),
+                                                                   std::make_pair<int, std::string>(100, "C"),
+                                                                   std::make_pair<int, std::string>(50, "L"),
+                                                                   std::make_pair<int, std::string>(10, "X"),
+                                                                   std::make_pair<int, std::string>(5, "V"),
+                                                                   std::make_pair<int, std::string>(1, "I")};
 
 std::string getSubNumber(int& number)
 {
@@ -63,7 +55,7 @@ std::string convertToRomanFromArabic(const int arabicNumber)
 
 TEST(RomanNumbers, ConvertSimpleNumbers)
 {
-    for (const auto& arabicRomanPair: arabicRomanMap)
+    for (const auto& arabicRomanPair: arabicRomanVector)
     {
         EXPECT_EQ(arabicRomanPair.second, convertToRomanFromArabic(arabicRomanPair.first));
     }
