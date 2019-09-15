@@ -18,3 +18,9 @@ In Roman numerals 1990 is MCMXC:
 */
 
 #include <gtest/gtest.h>
+
+
+TEST(RomanNumbers, ConvertSimpleNumbers)
+{
+    EXPECT_EQ(1, convert('I'));
+}
