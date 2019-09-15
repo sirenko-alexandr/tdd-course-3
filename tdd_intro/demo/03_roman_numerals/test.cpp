@@ -19,12 +19,23 @@ In Roman numerals 1990 is MCMXC:
 
 #include <gtest/gtest.h>
 
-std::string convertToRomanFromArabic(unsigned int arabicNumber)
+std::string convertToRomanFromArabic(const unsigned int arabicNumber)
 {
     return "I";
 }
 
 TEST(RomanNumbers, ConvertSimpleNumbers)
 {
-    EXPECT_EQ("I", convertToRomanFromArabic(1));
+    const std::map<unsigned int, std::string> arabicRomanMap {std::make_pair<unsigned int, std::string>(1, "I"),
+                                                              std::make_pair<unsigned int, std::string>(5, "V"),
+                                                              std::make_pair<unsigned int, std::string>(10, "X"),
+                                                              std::make_pair<unsigned int, std::string>(50, "L"),
+                                                              std::make_pair<unsigned int, std::string>(100, "C"),
+                                                              std::make_pair<unsigned int, std::string>(500, "D"),
+                                                              std::make_pair<unsigned int, std::string>(1000, "M")};
+
+    for (const auto& arabicRomanPair: arabicRomanMap)
+    {
+        EXPECT_EQ(arabicRomanPair.second, convertToRomanFromArabic(arabicRomanPair.first));
+    }
 }
