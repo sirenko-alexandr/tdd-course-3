@@ -28,6 +28,32 @@ static std::vector<std::pair<int, std::string>> arabicRomanVector {std::make_pai
                                                                    std::make_pair<int, std::string>(5, "V"),
                                                                    std::make_pair<int, std::string>(1, "I")};
 
+static std::vector<std::pair<int, std::string>> reverseNumbers {std::make_pair<int, std::string>(100, "C"),
+                                                                std::make_pair<int, std::string>(10, "X"),
+                                                                std::make_pair<int, std::string>(1, "I")};
+
+std::pair<int, std::string> getReverseComplexNumber(const int number, const std::pair<int, std::string>& currentMainPair)
+{
+    for (const auto& pair: reverseNumbers)
+    {
+        if (currentMainPair.first - pair.first <= 0)
+        {
+            continue;
+        }
+
+        int compoundNumber = currentMainPair.first - pair.first;
+        std::string compoudRomanNumber = pair.second + currentMainPair.second;
+
+        if (number - compoundNumber >= 0)
+        {
+            return std::make_pair<int, std::string>(currentMainPair.first - pair.first,
+                                                    pair.second + currentMainPair.second);
+        }
+    }
+
+    return std::make_pair<int, std::string>(0, "");
+}
+
 std::pair<int, std::string> getPairByNumber(const int number)
 {
     for (const auto& pair: arabicRomanVector)
@@ -35,6 +61,12 @@ std::pair<int, std::string> getPairByNumber(const int number)
         if (number - pair.first >= 0)
         {
             return pair;
+        }
+
+        auto complexPair = getReverseComplexNumber(number, pair);
+        if (complexPair.first != 0)
+        {
+            return complexPair;
         }
     }
 
@@ -87,6 +119,19 @@ TEST(RomanNumbers, ComplexNumbersWithReverseOrder)
                                                      std::make_pair<int, std::string>(90, "XC"),
                                                      std::make_pair<int, std::string>(400, "CD"),
                                                      std::make_pair<int, std::string>(900, "CM")};
+    for (const auto& arabicRomanPair: complexNumbers)
+    {
+        EXPECT_EQ(arabicRomanPair.second, convertToRomanFromArabic(arabicRomanPair.first));
+    }
+}
+
+TEST(RomanNumbers, TaskData)
+{
+    const std::map<int, std::string> complexNumbers {std::make_pair<int, std::string>(1990, "MCMXC"),
+                                                     std::make_pair<int, std::string>(2008, "MMVIII"),
+                                                     std::make_pair<int, std::string>(2000, "MM"),
+                                                     std::make_pair<int, std::string>(8, "VIII"),
+                                                     std::make_pair<int, std::string>(1998, "MCMXCVIII")};
     for (const auto& arabicRomanPair: complexNumbers)
     {
         EXPECT_EQ(arabicRomanPair.second, convertToRomanFromArabic(arabicRomanPair.first));
