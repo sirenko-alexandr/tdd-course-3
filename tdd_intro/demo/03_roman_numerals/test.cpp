@@ -37,17 +37,22 @@ bool isPartOfNumber(const int number, const int part)
     return number - part >= 0;
 }
 
-std::pair<int, std::string> getReverseComplexNumber(const int number, const std::pair<int, std::string>& currentMainPair)
+bool isPossibleReverseNumber(const int mainNumber, const int possibleReverseNumber)
+{
+    return mainNumber - possibleReverseNumber > 0;
+}
+
+std::pair<int, std::string> tryToGetReverseComplexNumber(const int number, const std::pair<int, std::string>& currentMainPair)
 {
     for (const auto& pair: reverseNumbers)
     {
-        if (currentMainPair.first - pair.first <= 0)
+        if (!isPossibleReverseNumber(currentMainPair.first, pair.first))
         {
             continue;
         }
 
         int compoundNumber = currentMainPair.first - pair.first;
-        std::string compoudRomanNumber = pair.second + currentMainPair.second;
+        auto compoudRomanNumber = pair.second + currentMainPair.second;
 
         if (isPartOfNumber(number, compoundNumber))
         {
@@ -67,7 +72,7 @@ std::pair<int, std::string> getPairByNumber(const int number)
             return pair;
         }
 
-        auto complexPair = getReverseComplexNumber(number, pair);
+        auto complexPair = tryToGetReverseComplexNumber(number, pair);
         if (complexPair.first != 0)
         {
             return complexPair;
@@ -80,13 +85,13 @@ std::pair<int, std::string> getPairByNumber(const int number)
 std::string convertToRomanFromArabic(const int arabicNumber)
 {
     std::string romanNumber;
-    int tempValue = arabicNumber;
+    int operationalArabicNumber = arabicNumber;
 
-    while (tempValue)
+    while (operationalArabicNumber)
     {
-        auto pair = getPairByNumber(tempValue);
+        auto pair = getPairByNumber(operationalArabicNumber);
 
-        tempValue -= pair.first;
+        operationalArabicNumber -= pair.first;
         romanNumber += pair.second;
     }
 
