@@ -19,7 +19,17 @@ such: 1
 
 std::map<std::string, int> countWords(const std::string& sentence)
 {
-    return std::map<std::string, int>{std::make_pair("word", 1)};
+    auto position = sentence.find_first_of(" ");
+    if (position == std::string::npos)
+    {
+        return std::map<std::string, int>{std::make_pair(sentence, 1)};
+    }
+
+    auto firstWord = sentence.substr(0, position);
+    auto secondWord = sentence.substr(position + 1, sentence.size() - position - 1);
+
+    return std::map<std::string, int>{std::make_pair(firstWord, 1),
+                                      std::make_pair(secondWord, 1)};
 }
 
 TEST(WordCount, SimpleWord)
