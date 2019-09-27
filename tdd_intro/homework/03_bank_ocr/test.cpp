@@ -195,3 +195,14 @@ const Display s_display123456789 = { "    _  _     _  _  _  _  _ ",
                                      "  | _| _||_||_ |_   ||_||_|",
                                      "  ||_  _|  | _||_|  ||_| _|"
 };
+
+
+std::string GetNumbers(const Display& display)
+{
+    return "";
+}
+
+TEST(BankNumbers, displayAll0)
+{
+    EXPECT_EQ("0000000", GetNumbers(s_displayAll0));
+}
