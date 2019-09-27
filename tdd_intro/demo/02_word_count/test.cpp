@@ -17,6 +17,11 @@ such: 1
 #include <string>
 #include <map>
 
+std::map<std::string, int> countWords(const std::string& sentence)
+{
+    return std::map<std::string, int>{std::make_pair("word", 1)};
+}
+
 TEST(WordCount, SimpleWord)
 {
     auto words = countWords("word");
