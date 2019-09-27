@@ -45,3 +45,9 @@ TEST(WordCount, TwoWords)
     EXPECT_EQ(1, words["words"]);
     EXPECT_EQ(1, words["two"]);
 }
+
+TEST(WordCount, Repeating)
+{
+    auto words = countWords("repeat repeat");
+    EXPECT_EQ(2, words["repeat"]);
+}
