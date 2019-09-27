@@ -254,17 +254,15 @@ std::string GetNumbers(const Display& display)
     return numbers;
 }
 
-TEST(BankNumbers, displayAll0)
+TEST(BankNumbers, displayAllNumbers)
 {
-    EXPECT_EQ("000000000", GetNumbers(s_displayAll0));
-}
+    std::array<Display, 11> displays {s_displayAll0, s_displayAll1, s_displayAll2, s_displayAll3, s_displayAll4, s_displayAll5,
+                                      s_displayAll6, s_displayAll7, s_displayAll8, s_displayAll9, s_display123456789};
+    std::array<std::string, 11> answers {"000000000", "111111111", "222222222", "333333333", "444444444", "555555555",
+                                         "666666666", "777777777", "888888888", "999999999", "123456789"};
 
-TEST(BankNumbers, displayAll1)
-{
-    EXPECT_EQ("111111111", GetNumbers(s_displayAll1));
-}
-
-TEST(BankNumbers, display123456789)
-{
-    EXPECT_EQ("123456789", GetNumbers(s_display123456789));
+    for (unsigned short i = displays.size(); i < 11; ++i)
+    {
+        EXPECT_EQ(answers[i], GetNumbers(displays[i]));
+    }
 }
