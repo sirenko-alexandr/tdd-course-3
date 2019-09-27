@@ -17,3 +17,8 @@ such: 1
 #include <string>
 #include <map>
 
+TEST(WordCount, SimpleWord)
+{
+    auto words = countWords("word");
+    EXPECT_EQ(1, words["word"]);
+}
