@@ -17,6 +17,17 @@ such: 1
 #include <string>
 #include <map>
 
+std::string convertToLowerCase(const std::string& word)
+{
+    std::string lowerCaseWord = "";
+    for (const auto& symbol: word)
+    {
+        lowerCaseWord += static_cast<char>(std::tolower(symbol));
+    }
+
+    return lowerCaseWord;
+}
+
 std::string popWord(std::string& sentence)
 {
     while (sentence.size() && sentence[0] == ' ')
@@ -29,7 +40,7 @@ std::string popWord(std::string& sentence)
     auto word = sentence.substr(0, position);
     sentence.erase(0, position);
 
-    return word;
+    return convertToLowerCase(word);
 }
 
 std::map<std::string, int> countWords(const std::string& sentence)
