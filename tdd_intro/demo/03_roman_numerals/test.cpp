@@ -20,17 +20,17 @@ In Roman numerals 1990 is MCMXC:
 #include <gtest/gtest.h>
 #include <stdexcept>
 
-static std::array<std::pair<int, std::string>, 7> arabicRomanVector {std::make_pair<int, std::string>(1000, "M"),
-                                                                     std::make_pair<int, std::string>(500, "D"),
-                                                                     std::make_pair<int, std::string>(100, "C"),
-                                                                     std::make_pair<int, std::string>(50, "L"),
-                                                                     std::make_pair<int, std::string>(10, "X"),
-                                                                     std::make_pair<int, std::string>(5, "V"),
-                                                                     std::make_pair<int, std::string>(1, "I")};
+static std::array<std::pair<int, std::string>, 7> arabicRomanPairs {std::make_pair<int, std::string>(1000, "M"),
+                                                                    std::make_pair<int, std::string>(500, "D"),
+                                                                    std::make_pair<int, std::string>(100, "C"),
+                                                                    std::make_pair<int, std::string>(50, "L"),
+                                                                    std::make_pair<int, std::string>(10, "X"),
+                                                                    std::make_pair<int, std::string>(5, "V"),
+                                                                    std::make_pair<int, std::string>(1, "I")};
 
-static std::array<std::pair<int, std::string>, 3> reverseNumbers {std::make_pair<int, std::string>(100, "C"),
-                                                                  std::make_pair<int, std::string>(10, "X"),
-                                                                  std::make_pair<int, std::string>(1, "I")};
+static std::array<std::pair<int, std::string>, 3> reversePairs {std::make_pair<int, std::string>(100, "C"),
+                                                                std::make_pair<int, std::string>(10, "X"),
+                                                                std::make_pair<int, std::string>(1, "I")};
 
 bool isPartOfNumber(const int number, const int part)
 {
@@ -42,17 +42,17 @@ bool isPossibleReverseNumber(const int mainNumber, const int possibleReverseNumb
     return mainNumber - possibleReverseNumber > 0;
 }
 
-std::pair<int, std::string> tryToGetReverseComplexNumber(const int number, const std::pair<int, std::string>& currentMainPair)
+std::pair<int, std::string> tryToGetReversePair(const int number, const std::pair<int, std::string>& mainPair)
 {
-    for (const auto& pair: reverseNumbers)
+    for (const auto& reversePair: reversePairs)
     {
-        if (!isPossibleReverseNumber(currentMainPair.first, pair.first))
+        if (!isPossibleReverseNumber(mainPair.first, reversePair.first))
         {
             continue;
         }
 
-        int compoundNumber = currentMainPair.first - pair.first;
-        auto compoudRomanNumber = pair.second + currentMainPair.second;
+        int compoundNumber = mainPair.first - reversePair.first;
+        auto compoudRomanNumber = reversePair.second + mainPair.second;
 
         if (isPartOfNumber(number, compoundNumber))
         {
@@ -65,17 +65,17 @@ std::pair<int, std::string> tryToGetReverseComplexNumber(const int number, const
 
 std::pair<int, std::string> getPairByNumber(const int number)
 {
-    for (const auto& pair: arabicRomanVector)
+    for (const auto& pair: arabicRomanPairs)
     {
         if (isPartOfNumber(number, pair.first))
         {
             return pair;
         }
 
-        auto complexPair = tryToGetReverseComplexNumber(number, pair);
-        if (complexPair.first != 0)
+        auto reversePair = tryToGetReversePair(number, pair);
+        if (reversePair.first != 0)
         {
-            return complexPair;
+            return reversePair;
         }
     }
 
@@ -100,7 +100,7 @@ std::string convertToRomanFromArabic(const int arabicNumber)
 
 TEST(RomanNumbers, ConvertSimpleNumbers)
 {
-    for (const auto& arabicRomanPair: arabicRomanVector)
+    for (const auto& arabicRomanPair: arabicRomanPairs)
     {
         EXPECT_EQ(arabicRomanPair.second, convertToRomanFromArabic(arabicRomanPair.first));
     }
