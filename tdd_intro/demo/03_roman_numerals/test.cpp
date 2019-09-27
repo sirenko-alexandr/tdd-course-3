@@ -46,8 +46,7 @@ std::pair<int, std::string> getReverseComplexNumber(const int number, const std:
 
         if (number - compoundNumber >= 0)
         {
-            return std::make_pair<int, std::string>(currentMainPair.first - pair.first,
-                                                    pair.second + currentMainPair.second);
+            return std::make_pair<int, std::string>(std::move(compoundNumber), std::move(compoudRomanNumber));
         }
     }
 
