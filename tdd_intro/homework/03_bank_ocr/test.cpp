@@ -196,11 +196,16 @@ const Display s_display123456789 = { "    _  _     _  _  _  _  _ ",
                                      "  ||_  _|  | _||_|  ||_| _|"
 };
 
-bool IsEqual(const Digit& display, const Digit& another)
+static std::array<Digit, 10> s_allDigits {s_digit0, s_digit1, s_digit2,
+                                          s_digit3, s_digit4, s_digit5,
+                                          s_digit6, s_digit7, s_digit8,
+                                          s_digit9};
+
+bool IsEqual(const Digit& digit, const Digit& another)
 {
     for (int i = 0; i < g_linesInDigit; ++i)
     {
-        if (display.lines[i] != another.lines[i])
+        if (digit.lines[i] != another.lines[i])
         {
             return false;
         }
@@ -208,28 +213,55 @@ bool IsEqual(const Digit& display, const Digit& another)
     return true;
 }
 
-std::string GetNumbers(const Display& display)
+unsigned short GetNumberByDigit(const Digit& digit)
 {
-    Digit digit {display.lines[0].substr(0, 3),
-                 display.lines[1].substr(0, 3),
-                 display.lines[2].substr(0, 3)};
-
-    if (IsEqual(s_digit0, digit))
+    for (unsigned short i = 0; i < s_allDigits.size(); ++i)
     {
-        return "0000000";
+        if (IsEqual(digit, s_allDigits[i]))
+        {
+            return i;
+        }
+    }
+    throw std::runtime_error("Nothing was found.");
+}
+
+std::vector<Digit> GetDigits(const Display& display)
+{
+    std::vector<Digit> digits;
+
+    for (unsigned short i = 0; i < g_digitsOnDisplay * g_digitLen; i += g_digitLen)
+    {
+        Digit digit {display.lines[0].substr(i, g_digitLen),
+                     display.lines[1].substr(i, g_digitLen),
+                     display.lines[2].substr(i, g_digitLen)};
+        digits.push_back(digit);
     }
 
-    return "111111";
+    return digits;
+}
+
+std::string GetNumbers(const Display& display)
+{
+    auto digits = GetDigits(display);
+    std::string numbers = "";
+
+    for (const auto& digit : digits)
+    {
+        auto number = GetNumberByDigit(digit);
+        numbers += std::to_string(number);
+    }
+
+    return numbers;
 }
 
 TEST(BankNumbers, displayAll0)
 {
-    EXPECT_EQ("0000000", GetNumbers(s_displayAll0));
+    EXPECT_EQ("000000000", GetNumbers(s_displayAll0));
 }
 
 TEST(BankNumbers, displayAll1)
 {
-    EXPECT_EQ("111111", GetNumbers(s_displayAll1));
+    EXPECT_EQ("111111111", GetNumbers(s_displayAll1));
 }
 
 TEST(BankNumbers, display123456789)
