@@ -69,3 +69,9 @@ TEST(WordCount, Repeating)
     auto words = countWords("repeat repeat");
     EXPECT_EQ(2, words["repeat"]);
 }
+
+TEST(WordCount, BigDistance)
+{
+    auto words = countWords("repeat    repeat");
+    EXPECT_EQ(2, words["repeat"]);
+}
