@@ -32,6 +32,11 @@ static std::array<std::pair<int, std::string>, 3> reverseNumbers {std::make_pair
                                                                   std::make_pair<int, std::string>(10, "X"),
                                                                   std::make_pair<int, std::string>(1, "I")};
 
+bool isPartOfNumber(const int number, const int part)
+{
+    return number - part >= 0;
+}
+
 std::pair<int, std::string> getReverseComplexNumber(const int number, const std::pair<int, std::string>& currentMainPair)
 {
     for (const auto& pair: reverseNumbers)
@@ -44,7 +49,7 @@ std::pair<int, std::string> getReverseComplexNumber(const int number, const std:
         int compoundNumber = currentMainPair.first - pair.first;
         std::string compoudRomanNumber = pair.second + currentMainPair.second;
 
-        if (number - compoundNumber >= 0)
+        if (isPartOfNumber(number, compoundNumber))
         {
             return std::make_pair<int, std::string>(std::move(compoundNumber), std::move(compoudRomanNumber));
         }
@@ -57,7 +62,7 @@ std::pair<int, std::string> getPairByNumber(const int number)
 {
     for (const auto& pair: arabicRomanVector)
     {
-        if (number - pair.first >= 0)
+        if (isPartOfNumber(number, pair.first))
         {
             return pair;
         }
