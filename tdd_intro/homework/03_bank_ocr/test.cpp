@@ -196,10 +196,30 @@ const Display s_display123456789 = { "    _  _     _  _  _  _  _ ",
                                      "  ||_  _|  | _||_|  ||_| _|"
 };
 
+bool IsEqual(const Digit& display, const Digit& another)
+{
+    for (int i = 0; i < g_linesInDigit; ++i)
+    {
+        if (display.lines[i] != another.lines[i])
+        {
+            return false;
+        }
+    }
+    return true;
+}
 
 std::string GetNumbers(const Display& display)
 {
-    return "0000000";
+    Digit digit {display.lines[0].substr(0, 3),
+                 display.lines[1].substr(0, 3),
+                 display.lines[2].substr(0, 3)};
+
+    if (IsEqual(s_digit0, digit))
+    {
+        return "0000000";
+    }
+
+    return "111111";
 }
 
 TEST(BankNumbers, displayAll0)
@@ -209,5 +229,5 @@ TEST(BankNumbers, displayAll0)
 
 TEST(BankNumbers, displayAll1)
 {
-    EXPECT_EQ("111111", GetNumbers(s_displayAll0));
+    EXPECT_EQ("111111", GetNumbers(s_displayAll1));
 }
