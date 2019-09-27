@@ -17,19 +17,37 @@ such: 1
 #include <string>
 #include <map>
 
-std::map<std::string, int> countWords(const std::string& sentence)
+std::string popWord(std::string& sentence)
 {
-    auto position = sentence.find_first_of(" ");
-    if (position == std::string::npos)
+    while (sentence.size() && sentence[0] == ' ')
     {
-        return std::map<std::string, int>{std::make_pair(sentence, 1)};
+        sentence.erase(0, 1);
     }
 
-    auto firstWord = sentence.substr(0, position);
-    auto secondWord = sentence.substr(position + 1, sentence.size() - position - 1);
+    auto position = sentence.find_first_of(" ");
 
-    return std::map<std::string, int>{std::make_pair(firstWord, 1),
-                                      std::make_pair(secondWord, 1)};
+    auto word = sentence.substr(0, position);
+    sentence.erase(0, position);
+
+    return word;
+}
+
+std::map<std::string, int> countWords(const std::string& sentence)
+{
+    std::map<std::string, int> wordsMap;
+    std::string oparationSentence = sentence;
+
+    while (oparationSentence.size())
+    {
+        auto word = popWord(oparationSentence);
+        if (wordsMap.count(word) == 0)
+        {
+            wordsMap[word] = 0;
+        }
+        wordsMap[word] += 1;
+    }
+
+    return wordsMap;
 }
 
 TEST(WordCount, SimpleWord)
