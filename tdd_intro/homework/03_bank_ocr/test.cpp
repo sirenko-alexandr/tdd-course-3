@@ -206,3 +206,8 @@ TEST(BankNumbers, displayAll0)
 {
     EXPECT_EQ("0000000", GetNumbers(s_displayAll0));
 }
+
+TEST(BankNumbers, displayAll1)
+{
+    EXPECT_EQ("111111", GetNumbers(s_displayAll0));
+}
