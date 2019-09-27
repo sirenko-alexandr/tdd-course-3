@@ -199,7 +199,7 @@ const Display s_display123456789 = { "    _  _     _  _  _  _  _ ",
 
 std::string GetNumbers(const Display& display)
 {
-    return "";
+    return "0000000";
 }
 
 TEST(BankNumbers, displayAll0)
