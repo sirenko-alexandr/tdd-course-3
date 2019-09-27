@@ -92,3 +92,10 @@ TEST(WordCount, BigLetter)
     auto words = countWords("Letter letter");
     EXPECT_EQ(2, words["letter"]);
 }
+
+TEST(WordCount, PunctuationSymbols)
+{
+    auto words = countWords("comma, dot.");
+    EXPECT_EQ(1, words["comma"]);
+    EXPECT_EQ(1, words["dot"]);
+}
