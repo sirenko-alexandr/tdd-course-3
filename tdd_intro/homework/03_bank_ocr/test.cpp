@@ -195,3 +195,74 @@ const Display s_display123456789 = { "    _  _     _  _  _  _  _ ",
                                      "  | _| _||_||_ |_   ||_||_|",
                                      "  ||_  _|  | _||_|  ||_| _|"
 };
+
+static std::array<Digit, 10> s_allDigits {s_digit0, s_digit1, s_digit2,
+                                          s_digit3, s_digit4, s_digit5,
+                                          s_digit6, s_digit7, s_digit8,
+                                          s_digit9};
+
+bool IsEqual(const Digit& digit, const Digit& another)
+{
+    for (int i = 0; i < g_linesInDigit; ++i)
+    {
+        if (digit.lines[i] != another.lines[i])
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+unsigned short GetNumberByDigit(const Digit& digit)
+{
+    for (unsigned short i = 0; i < s_allDigits.size(); ++i)
+    {
+        if (IsEqual(digit, s_allDigits[i]))
+        {
+            return i;
+        }
+    }
+    throw std::runtime_error("Nothing was found.");
+}
+
+std::vector<Digit> GetDigits(const Display& display)
+{
+    std::vector<Digit> digits;
+
+    for (unsigned short i = 0; i < g_digitsOnDisplay * g_digitLen; i += g_digitLen)
+    {
+        Digit digit {display.lines[0].substr(i, g_digitLen),
+                     display.lines[1].substr(i, g_digitLen),
+                     display.lines[2].substr(i, g_digitLen)};
+        digits.push_back(digit);
+    }
+
+    return digits;
+}
+
+std::string GetNumbers(const Display& display)
+{
+    auto digits = GetDigits(display);
+    std::string numbers = "";
+
+    for (const auto& digit : digits)
+    {
+        auto number = GetNumberByDigit(digit);
+        numbers += std::to_string(number);
+    }
+
+    return numbers;
+}
+
+TEST(BankNumbers, displayAllNumbers)
+{
+    std::array<Display, 11> displays {s_displayAll0, s_displayAll1, s_displayAll2, s_displayAll3, s_displayAll4, s_displayAll5,
+                                      s_displayAll6, s_displayAll7, s_displayAll8, s_displayAll9, s_display123456789};
+    std::array<std::string, 11> answers {"000000000", "111111111", "222222222", "333333333", "444444444", "555555555",
+                                         "666666666", "777777777", "888888888", "999999999", "123456789"};
+
+    for (unsigned short i = displays.size(); i < 11; ++i)
+    {
+        EXPECT_EQ(answers[i], GetNumbers(displays[i]));
+    }
+}
